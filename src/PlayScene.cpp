@@ -15,7 +15,7 @@ void PlayScene::draw()
 {
 	drawDisplayList();
 
-	if(m_bDebugmod)
+	if(m_bDebugMode)
 	{
 		Util::DrawLine(m_pPlayer->getTransform()->position, m_pPlaneSprite->getTransform()->position);
 	}
@@ -116,20 +116,21 @@ void PlayScene::handleEvents()
 		TheGame::Instance()->quit();
 	}
 
-	if(!m_bHpressed)
+	// H KEY
+	if(!m_bDebugKeys[H_KEY])
 	{
 		if(EventManager::Instance().isKeyDown((SDL_SCANCODE_H)))
 		{
-			m_bDebugmod = !m_bDebugmod;
+			m_bDebugMode = !m_bDebugMode;
 
-			m_bHpressed = true;
-			if(m_bDebugmod)
+			m_bDebugKeys[H_KEY] = true;
+			if(m_bDebugMode)
 			{
-				std::cout << "Debug Mode on" << std::endl;
+				std::cout << "DEBUG Mode on" << std::endl;
 			}
-			else if(!m_bDebugmod)
+			else if(!m_bDebugMode)
 			{
-				std::cout << "Debug Mode off" << std::endl;
+				std::cout << "DEBUG Mode off" << std::endl;
 			}
 			
 		}
@@ -139,9 +140,51 @@ void PlayScene::handleEvents()
 
 	if (EventManager::Instance().isKeyUp((SDL_SCANCODE_H)))
 	{
-		m_bHpressed = false;
+		m_bDebugKeys[H_KEY] = false;
 	}
 
+	// H KEY
+	if(!m_bDebugKeys[K_KEY])
+	{
+		if(EventManager::Instance().isKeyDown((SDL_SCANCODE_K)))
+		{
+			std::cout << "DEBUG: Enemy Takes Damage!!" << std::endl;
+			m_bDebugKeys[K_KEY] = true;
+		}		
+	}
+
+	if (EventManager::Instance().isKeyUp((SDL_SCANCODE_K)))
+	{
+		m_bDebugKeys[K_KEY] = false;
+	}
+
+	// P KEY
+	if (!m_bDebugKeys[P_KEY])
+	{
+		if (EventManager::Instance().isKeyDown((SDL_SCANCODE_P)))
+		{
+			m_bPatrolMode = !m_bPatrolMode;
+
+			m_bDebugKeys[P_KEY] = true;
+			if (m_bPatrolMode)
+			{
+				std::cout << "PATROL Mode on" << std::endl;
+			}
+			else if (!m_bPatrolMode)
+			{
+				std::cout << "PATROL Mode off" << std::endl;
+			}
+
+		}
+
+
+	}
+
+	if (EventManager::Instance().isKeyUp((SDL_SCANCODE_P)))
+	{
+		m_bDebugKeys[P_KEY] = false;
+	}
+	
 	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_1))
 	{
 		TheGame::Instance()->changeSceneState(START_SCENE);
@@ -155,8 +198,8 @@ void PlayScene::handleEvents()
 
 void PlayScene::start()
 {
-	m_bDebugmod = false;
-	m_bHpressed = false;
+	m_bDebugMode = false;
+
 	// Plane Sprite
 	m_pPlaneSprite = new Plane();
 	addChild(m_pPlaneSprite);
