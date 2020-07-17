@@ -15,7 +15,10 @@ void PlayScene::draw()
 {
 	drawDisplayList();
 
-	Util::DrawLine(m_pPlayer->getTransform()->position, m_pPlaneSprite->getTransform()->position);
+	if(m_bDebugmod)
+	{
+		Util::DrawLine(m_pPlayer->getTransform()->position, m_pPlaneSprite->getTransform()->position);
+	}
 }
 
 void PlayScene::update()
@@ -113,6 +116,32 @@ void PlayScene::handleEvents()
 		TheGame::Instance()->quit();
 	}
 
+	if(!m_bHpressed)
+	{
+		if(EventManager::Instance().isKeyDown((SDL_SCANCODE_H)))
+		{
+			m_bDebugmod = !m_bDebugmod;
+
+			m_bHpressed = true;
+			if(m_bDebugmod)
+			{
+				std::cout << "Debug Mode on" << std::endl;
+			}
+			else if(!m_bDebugmod)
+			{
+				std::cout << "Debug Mode off" << std::endl;
+			}
+			
+		}
+
+		
+	}
+
+	if (EventManager::Instance().isKeyUp((SDL_SCANCODE_H)))
+	{
+		m_bHpressed = false;
+	}
+
 	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_1))
 	{
 		TheGame::Instance()->changeSceneState(START_SCENE);
@@ -126,6 +155,8 @@ void PlayScene::handleEvents()
 
 void PlayScene::start()
 {
+	m_bDebugmod = false;
+	m_bHpressed = false;
 	// Plane Sprite
 	m_pPlaneSprite = new Plane();
 	addChild(m_pPlaneSprite);
