@@ -277,60 +277,60 @@ void PlayScene::m_setGridLOS()
 	}
 }
 
-//void PlayScene::m_buildClockwisePatrolPath()
-//{
-//	// moving right
-//	for(auto i = 0; i < Config::COL_NUM; i++)
-//	{
-//		m_pPatrolPath.push_back((m_pGrid[i]));
-//	}
-//
-//	// moving down
-//	for (auto i = 1; i < Config::ROW_NUM; i++)
-//	{
-//		m_pPatrolPath.push_back(m_pGrid[i * Config::COL_NUM + Config::COL_NUM - 1]);
-//	}
-//	
-//	// moving left
-//	for (auto i = 1; i < Config::COL_NUM; i++)
-//	{
-//		m_pPatrolPath.push_back(m_pGrid[Config::COL_NUM + Config::ROW_NUM - 1 - i]);
-//	}
-//	
-//	// moving up
-//	for (auto i = Config::ROW_NUM - 2; i > 0; i--)
-//	{
-//		m_pPatrolPath.push_back(m_pGrid[i * Config::COL_NUM]);
-//	}
-//}
-
 void PlayScene::m_buildClockwisePatrolPath()
 {
-
-	// right
-	for (auto i = 0; i < Config::COL_NUM; i++)
+	// moving right
+	for(auto i = 0; i < Config::COL_NUM; i++)
 	{
-		m_pPatrolPath.push_back(m_pGrid[i]);
+		m_pPatrolPath.push_back((m_pGrid[i]));
 	}
 
-	// down
+	// moving down
 	for (auto i = 1; i < Config::ROW_NUM; i++)
 	{
 		m_pPatrolPath.push_back(m_pGrid[i * Config::COL_NUM + Config::COL_NUM - 1]);
 	}
-
-	// left
+	
+	// moving left
 	for (auto i = 1; i < Config::COL_NUM; i++)
 	{
-		m_pPatrolPath.push_back(m_pGrid[Config::COL_NUM * Config::ROW_NUM - 1 - i]);
+		m_pPatrolPath.push_back(m_pGrid[Config::COL_NUM + Config::ROW_NUM - 1 - i]);
 	}
-
-	//up
+	
+	// moving up
 	for (auto i = Config::ROW_NUM - 2; i > 0; i--)
 	{
 		m_pPatrolPath.push_back(m_pGrid[i * Config::COL_NUM]);
 	}
 }
+
+//void PlayScene::m_buildClockwisePatrolPath()
+//{
+//
+//	// right
+//	for (auto i = 0; i < Config::COL_NUM; i++)
+//	{
+//		m_pPatrolPath.push_back(m_pGrid[i]);
+//	}
+//
+//	// down
+//	for (auto i = 1; i < Config::ROW_NUM; i++)
+//	{
+//		m_pPatrolPath.push_back(m_pGrid[i * Config::COL_NUM + Config::COL_NUM - 1]);
+//	}
+//
+//	// left
+//	for (auto i = 1; i < Config::COL_NUM; i++)
+//	{
+//		m_pPatrolPath.push_back(m_pGrid[Config::COL_NUM * Config::ROW_NUM - 1 - i]);
+//	}
+//
+//	//up
+//	for (auto i = Config::ROW_NUM - 2; i > 0; i--)
+//	{
+//		m_pPatrolPath.push_back(m_pGrid[i * Config::COL_NUM]);
+//	}
+//}
 
 void PlayScene::m_displayPatrolPath()
 {
