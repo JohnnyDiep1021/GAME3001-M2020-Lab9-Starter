@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __DUBUG_KEYS__
-#define __DUBUG_KEYS__
+#ifndef __DEBUG_KEYS__
+#define __DEBUG_KEYS__
 
 enum DebugKeys
 {
@@ -9,5 +9,5 @@ enum DebugKeys
 	P_KEY,
 	NUM_OF_DEBUG_KEYS
 };
-#endif /* defined (__DUBUG_KEYS__) */
- 
+
+#endif /* defined (__DEBUG_KEYS__) */

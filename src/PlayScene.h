@@ -6,8 +6,9 @@
 #include "Plane.h"
 #include "Player.h"
 #include "Button.h"
-#include "Obstacle.h"
 #include "DebugKeys.h"
+#include "Obstacle.h"
+#include "PathNode.h"
 
 class PlayScene : public Scene
 {
@@ -22,11 +23,23 @@ public:
 	virtual void handleEvents() override;
 	virtual void start() override;
 private:
+	// PRIVATE FUNCTIONS
+	void m_buildGrid();
+
+	void m_displayGrid();
+
+	void m_displayGridLOS();
+
+	void m_setGridLOS();
+
+
+	// MEMBER VARIABLES
 	glm::vec2 m_mousePosition;
 
 	Plane* m_pPlaneSprite;
 	Player* m_pPlayer;
 	bool m_playerFacingRight;
+	bool m_bPlayerHasLOS;
 
 	Obstacle* m_pObstacle;
 
@@ -35,6 +48,14 @@ private:
 
 	bool m_bDebugKeys[NUM_OF_DEBUG_KEYS];
 
+	std::vector<PathNode*> m_pGrid;
+
+	// patrol path goes here
+	std::vector<PathNode*> m_pPatrolPath;
+	void m_buildClockwisePatrolPath();
+	void m_displayPatrolPath();
+	
+	
 };
 
 #endif /* defined (__PLAY_SCENE__) */
